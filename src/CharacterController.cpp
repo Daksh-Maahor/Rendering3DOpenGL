@@ -1,7 +1,7 @@
 #include "CharacterController.h"
 #include <algorithm>
-#include <iostream> // Added for debugging output
-#include <cmath> // Add this at the top if not present
+#include <iostream>
+#include <cmath>
 
 CharacterController::CharacterController(Camera& camera, Terrain& terrain) 
     : camera(camera), terrain(terrain), position(0.0f, 1.0f, 0.0f), velocity(0.0f),
@@ -92,7 +92,7 @@ void CharacterController::updatePhysics(float deltaTime) {
         velocity.y = -20.0f;
     }
     
-    // Sub-stepping: break movement into small steps to prevent tunneling
+    // break movement into small steps to prevent tunneling
     const float maxStep = 0.1f; // Maximum movement per sub-step
     float timeLeft = deltaTime;
     glm::vec3 startPos = position;
@@ -104,7 +104,7 @@ void CharacterController::updatePhysics(float deltaTime) {
         timeLeft -= step;
     }
     
-    // Emergency correction: if inside a block, push up until not inside
+    // if inside a block, push up until not inside
     int emergencyPushes = 0;
     while (checkBlockCollision(position) && emergencyPushes < 10) {
         position.y += 0.1f;
@@ -119,18 +119,17 @@ void CharacterController::updatePhysics(float deltaTime) {
 }
 
 void CharacterController::updateCamera() {
-    // Update camera position to follow character
     camera.position = position + glm::vec3(0.0f, 0.5f, 0.0f);
 }
 
 void CharacterController::handleCollision() {
     // Check if we're on ground by looking for blocks below us
     glm::vec3 groundCheckPos = position;
-    groundCheckPos.y -= 0.1f; // Check slightly below our feet
+    groundCheckPos.y -= 0.1f;
     
     bool wasOnGround = onGround;
     
-    // More comprehensive ground check - check multiple points around the player's feet
+    // check multiple points around the player's feet
     bool groundFound = false;
     float checkRadius = playerRadius;
     float step = 0.1f;
@@ -152,8 +151,7 @@ void CharacterController::handleCollision() {
     
     onGround = groundFound;
     
-    if (onGround && !wasOnGround) {
-        // We just landed
+    if (onGround && !wasOnGround) { // landed
         velocity.y = 0.0f;
         jumping = false;
     }
@@ -170,7 +168,6 @@ bool CharacterController::checkBlockCollision(const glm::vec3& pos, float radius
     // Check the player's bounding box against terrain blocks
     // Player is represented as a cylinder with radius and height
     
-    // Use a finer step for more precise collision detection
     float step = 0.1f; // Check every 0.1 units for better precision
     
     // Check from ground level (Y=0) up to the player's head (pos.y + height)
@@ -178,7 +175,7 @@ bool CharacterController::checkBlockCollision(const glm::vec3& pos, float radius
     float endY = pos.y + height;
     const int numLevels = static_cast<int>((endY - startY) / step) + 1;
     
-    // Debug: Track collision checks
+    // Track collision checks for debugging
     static int debugCounter = 0;
     bool debugThisFrame = (debugCounter < 20);
     
@@ -257,7 +254,7 @@ glm::vec3 CharacterController::resolveCollision(const glm::vec3& oldPos, const g
     glm::vec3 resolvedPos = oldPos;
     glm::vec3 movement = newPos - oldPos;
     
-    // Debug: Track collision resolution
+    // Track collision resolution for debugging
     static int debugCounter = 0;
     bool debugThisFrame = (debugCounter < 10);
     
@@ -385,4 +382,4 @@ void CharacterController::setJumpForce(float force) {
 
 void CharacterController::setGroundLevel(float level) {
     groundLevel = level;
-} 
+}

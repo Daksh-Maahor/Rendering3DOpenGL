@@ -96,4 +96,4 @@ std::vector<unsigned int> Cube::getCubeIndices() {
     };
     
     return indices;
-} 
+}

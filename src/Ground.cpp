@@ -29,4 +29,4 @@ std::vector<unsigned int> Ground::getGroundIndices() {
     };
     
     return indices;
-} 
+}

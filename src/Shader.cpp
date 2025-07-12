@@ -144,4 +144,4 @@ int Shader::getUniformLocation(const std::string& name) {
     int location = glGetUniformLocation(programID, name.c_str());
     uniformCache[name] = location;
     return location;
-} 
+}

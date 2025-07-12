@@ -24,7 +24,7 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-// Function prototypes
+// Function declarations
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -69,7 +69,7 @@ int main() {
         return -1;
     }
 
-    // Configure global OpenGL state
+    // Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
     // Build and compile shaders
@@ -81,14 +81,13 @@ int main() {
 
     // Create terrain
     Terrain terrain(64, 64, 20.0f); // 64x64 terrain with scale 20
-    terrain.setHeightMultiplier(8.0f); // Higher mountains
-    terrain.setOctaves(6); // More detail
+    terrain.setHeightMultiplier(8.0f);
+    terrain.setOctaves(6);
     terrain.generate();
 
     // Create character controller
     player = new CharacterController(camera, terrain);
     
-    // Find a good starting position on the terrain
     float startX = 0.0f;
     float startZ = 0.0f;
     float terrainHeight = terrain.getHeightAt(startX, startZ);
@@ -101,7 +100,7 @@ int main() {
 
     // Main render loop
     while (!glfwWindowShouldClose(window)) {
-        // Per-frame time logic
+        
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -205,16 +204,14 @@ void renderCrosshair() {
     glLoadIdentity();
     
     // Draw crosshair
-    glColor3f(1.0f, 1.0f, 1.0f); // White color
+    glColor3f(1.0f, 1.0f, 1.0f);
     glLineWidth(2.0f);
     
     glBegin(GL_LINES);
-    // Horizontal line
-    glVertex2f(-0.02f, 0.0f);
-    glVertex2f(0.02f, 0.0f);
-    // Vertical line
-    glVertex2f(0.0f, -0.02f);
-    glVertex2f(0.0f, 0.02f);
+    glVertex2f(-0.2f, 0.0f);
+    glVertex2f(0.2f, 0.0f);
+    glVertex2f(0.0f, -0.2f);
+    glVertex2f(0.0f, 0.2f);
     glEnd();
     
     // Restore matrix
@@ -225,4 +222,4 @@ void renderCrosshair() {
     
     // Re-enable depth testing
     glEnable(GL_DEPTH_TEST);
-} 
+}

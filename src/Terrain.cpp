@@ -44,7 +44,7 @@ bool Terrain::hasBlockAt(int x, int y, int z) const {
     int gridZ = static_cast<int>(z + height / 2.0f);
     int gridY = y;
     
-    // Debug: Track block checks
+    // Track block checks
     static int debugCounter = 0;
     bool debugThisCheck = (debugCounter < 50);
     
@@ -78,15 +78,13 @@ void Terrain::setLacunarity(float l) { lacunarity = l; }
 void Terrain::setBaseHeight(float h) { baseHeight = h; }
 void Terrain::setHeightMultiplier(float m) { heightMultiplier = m; }
 
-
-
 void Terrain::generateHeightMap() {
     for (int z = 0; z < height; z++) {
         for (int x = 0; x < width; x++) {
             float sampleX = x / scale;
             float sampleZ = z / scale;
             
-            // Use the new PerlinNoise class
+            // Generate noise value using Perlin noise
             float noiseHeight = noiseGenerator.octaveNoise(sampleX, sampleZ, octaves, persistence, lacunarity);
             
             // Convert to positive height range and round to integer
@@ -120,9 +118,8 @@ void Terrain::generateCubes() {
 }
 
 glm::vec3 Terrain::getTerrainColor(float height) const {
-    // Color based on height - creates natural-looking terrain
     if (height < 1.0f) {
-        return glm::vec3(0.6f, 0.4f, 0.2f); // Sand/Brown
+        return glm::vec3(0.6f, 0.4f, 0.2f); // Sand
     } else if (height < 2.0f) {
         return glm::vec3(0.2f, 0.8f, 0.2f); // Grass
     } else if (height < 4.0f) {
@@ -205,4 +202,4 @@ void Terrain::drawCubeWithFaceCulling(Shader& shader, const glm::vec3& position,
             cube.drawFace(face);
         }
     }
-} 
+}

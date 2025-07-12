@@ -85,4 +85,4 @@ float PerlinNoise::grad(int hash, float x, float y, float z) const {
     float u = h < 8 ? x : y;
     float v = h < 4 ? y : h == 12 || h == 14 ? x : z;
     return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
-} 
+}

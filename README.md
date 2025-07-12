@@ -9,14 +9,12 @@ A modern OpenGL-based 3D renderer built with C++ that renders multiple textured 
 - **Camera Controls**: First-person camera with mouse look and WASD movement
 - **Modern OpenGL**: Uses OpenGL 3.3+ with core profile
 - **Shader-based Rendering**: Custom vertex and fragment shaders
-- **Object-Oriented Design**: Clean separation of concerns with dedicated classes
 
 ## Controls
 
 - **WASD**: Move camera forward/backward/left/right
 - **Mouse**: Look around (camera rotation)
 - **Mouse Wheel**: Zoom in/out
-- **ESC**: Exit application
 
 ## Dependencies
 
@@ -52,7 +50,7 @@ brew install cmake glfw glew glm
 1. Clone or download the project
 2. Create a build directory:
    ```bash
-   mkdir build
+   mkdir -p build
    cd build
    ```
 

@@ -1,3 +1,0 @@
-/home/Daksh-Maahor/Programming/CPP/Rendering3D/build/CMakeFiles/Rendering3D.dir
-/home/Daksh-Maahor/Programming/CPP/Rendering3D/build/CMakeFiles/edit_cache.dir
-/home/Daksh-Maahor/Programming/CPP/Rendering3D/build/CMakeFiles/rebuild_cache.dir
